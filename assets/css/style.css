@@ -1,33 +1,34 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* General body styling */
 body {
-  font-family: CooperHewittBook;
+  font-family: "CooperHewittBook", sans-serif;
   font-size: 22px;
-  background: #191919;
+  background: #111111;
   color: white;
-  height: 100vh; /* Ensure the body fits the screen height */
+  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  width: 100%;
   justify-content: flex-start;
 }
 
-/* Headings */
+a {
+  color: inherit;
+}
+
 h1 {
-  font-family: CooperHewittHeavy;
+  font-family: "CooperHewittHeavy", sans-serif;
+  font-size: 56px;
   line-height: 52px;
   text-align: left;
-  font-size: 56px;
 }
 
 h2 {
-  font-family: CooperHewittBook;
+  font-family: "CooperHewittBook", sans-serif;
   font-size: 16px;
   font-weight: 600;
 }
@@ -40,131 +41,114 @@ summary {
   display: flex;
   flex-direction: row;
   width: 100%;
-
-}
-
-.title {
-  padding-top: 20px;
-
-}
-
-
-
-image:hover {
-  filter: none;
-}
-
-a {
-  color: inherit;
 }
 
 .blocker {
   display: block;
   padding-left: 400px;
-
 }
 
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  padding-top: 20px;
-  padding: 15px;
-  padding-bottom: 20px;
-  width: 400px;
-  flex: none;
-  position: relative;
-  font-size: 16px;
-  justify-content: space-between;
-
-}
-
-
-/* Grid container */
-.grid-container {
-  display: grid;
-  grid-auto-flow: column; /* Columns grow horizontally */
-  grid-auto-columns: minmax(100px, 1fr); /* Flexible column widths */
-  height: 100%; /* Adjust for header height */
-  background-color: white;
-  gap: 0; /* No spacing between columns */
-}
-
-
-/* Header styling */
 .header {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  position: fixed; /* Ensure the header is fixed */
+  position: fixed;
   bottom: 0;
-  background-color: #191919;
   width: 400px;
   height: 100%;
-  box-sizing: border-box;
+  padding: 20px 15px;
+  background-color: #151515;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow-y: auto;
 }
 
-/* Gradient items */
-.gradient {
+.footer {
+  position: relative;
+  width: 400px;
+  flex: none;
+  padding: 20px 15px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  mix-blend-mode: darken;
-    cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.footer-mobile {
+  display: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(100px, 1fr);
+  height: 100%;
+  background-color: white;
+  gap: 0;
+}
+
+.title-desktop {
+  display: block;
+  padding-top: 20px;
+}
+
+.title-mobile {
+  display: none;
+}
+
+.content {
+  display: none;
+  flex-direction: column;
+  padding-bottom: 20px;
+  font-family: "FragmentMono", monospace;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.text {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.left-bound {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+  z-index: 2;
+}
+
+.right-bound {
+    grid-column: 1 / 3;
+  grid-row: 1 / 3;
+  z-index: 1;
+  text-align: right;
 }
 
 .btnControl {
   display: none;
 }
 
-
-.gradient:has(.btnControl:checked) {
-  animation-name: example;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  transform: scale(1.5, 1.0);
-  transform-origin: center;
-  /*order: -1;*/
-
-
+.gradient {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  mix-blend-mode: darken;
+  cursor: pointer;
 }
 
+.gradient:has(.btnControl:checked) {
 
+  animation-name: waveAnimation;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+  transform: scale(1.5, 1);
+  transform-origin: center;
+}
 
 .gradient:has(.btnControl:not(:checked)):hover {
-  animation-name: example;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation: waveAnimation infinite linear;
   animation-duration: 5s !important;
 }
 
-.gradient:has(.btnControl:checked):hover {
-}
-
-
-
-.content {
-  padding-bottom: 20px;
-  font-family: FragmentMono;
-  font-size: 16px;
-  line-height: 20px;
-  flex-direction: column;
-  display: none;
-
-}
-
-.text {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.right-bound {
-  text-align: right;
+image:hover {
+  filter: none;
 }
 
 .waves {
@@ -177,128 +161,86 @@ a {
 }
 
 .wave {
-  animation-name: example;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  width: 100%;
-  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   mix-blend-mode: darken;
   display: none;
-
+  animation: waveAnimation infinite linear;
 }
 
-@keyframes example {
-  from {  background-position: 0px 0px;}
-  to {  background-position: 0px 200vh;}
+@keyframes waveAnimation {
+  from { background-position: 0px 0px; }
+  to { background-position: 0px 200vh; }
 }
 
 @media screen and (max-width: 980px) {
   body {
     flex-direction: column;
-    font-size: 14px;
+    font-size: 3.5vw;
   }
 
-  image:active {
-  filter: none;
+  h1 {
+    font-size: 8vw;
+    line-height: 7vw;
   }
 
   svg {
     width: 100%;
   }
 
-  h1{
-    font-size: 8vw;
-    line-height: 7vw;
+  image:active {
+    filter: none;
   }
 
-  .grid-container {
-  display: none;
-
-  }
-
-  .content {
-    display: block;
-    font-size: 14px;
-    line-height: 18px;
-    padding-bottom: 0px;
-    flex-direction: column;
+  .grid-container,
+  .footer,
+  .title-desktop, .wrapper {
+    display: none;
   }
 
   .header {
     width: 100%;
     height: 100%;
+    padding: 0 20px 20px 20px;
     gap: 20px;
-    padding: 20px;
-    padding-top: 0px;
-
-
+    flex-direction: column;
     overflow-x: auto;
-    flex-direction: column-reverse;
   }
 
   .blocker {
-      display: none;
-      padding-left: 0px;
-      padding-top: 50vh;
-      order: 300;
-  }
-
-  .gradient {
-  }
-
-  .footer {
     display: none;
-    font-size: 4.5vw;
   }
 
-  .wrapper {
-  display: grid;
-  grid-template-rows: 1fr;
-  width: 100%;
+  .footer-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 20px;
+    position: relative;
+    flex: none;
   }
 
-  .gradient:has(.btnControl:checked) {
-    transform: scale(1.0, 1.0);
-  }
-
-  .title {
+  .title-mobile {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: end;
-  
+    align-items: flex-end;
     padding-top: 30px;
-    margin-bottom: -5x;
+    margin-bottom: -5px;
+  }
+
+  .content {
+    display: block; 
+    font-size: 3.5vw;
+    line-height: 4vw;
+    padding-bottom: 0;
   }
 
   .text {
-    display: display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    flex-direction: column;
+    padding-top: 5px;
   }
-
-  .right-bound {
-  text-align: right;
 }
-
-  .gradient:has(.btnControl:not(:checked)):hover {
-    animation-name: none;
-  }
-
-
-
-
-  }
-
-}
-
-
-
-
-
-
-
